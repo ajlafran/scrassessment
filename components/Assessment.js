@@ -15,6 +15,7 @@ function load() { try { return JSON.parse(localStorage.getItem(KEY)); } catch { 
 export default function Assessment({ questions, config }) {
   const [stage, setStage] = useState("intro"); // intro | profile | quiz | checkpoint | result
   const [profile, setProfile] = useState({});
+  const [company, setCompany] = useState("");
   const [idx, setIdx] = useState(0);
   const [answers, setAnswers] = useState({});
   const [unlocked, setUnlocked] = useState(false);
@@ -25,11 +26,11 @@ export default function Assessment({ questions, config }) {
     const s = load();
     if (s && typeof s.answers === "object") {
       setStage(s.stage ?? "intro"); setIdx(Math.min(s.idx ?? 0, questions.length - 1));
-      setAnswers(s.answers ?? {}); setUnlocked(!!s.unlocked); setProfile(s.profile ?? {});
+      setAnswers(s.answers ?? {}); setUnlocked(!!s.unlocked); setProfile(s.profile ?? {}); setCompany(s.company ?? "");
     }
     setReady(true);
   }, [questions.length]);
-  useEffect(() => { if (ready) save({ stage, idx, answers, unlocked, profile }); }, [ready, stage, idx, answers, unlocked, profile]);
+  useEffect(() => { if (ready) save({ stage, idx, answers, unlocked, profile, company }); }, [ready, stage, idx, answers, unlocked, profile, company]);
   useEffect(() => {
     if (!ready) return;
     if (first.current) { first.current = false; return; }
@@ -45,7 +46,7 @@ export default function Assessment({ questions, config }) {
     const firstOpen = questions.findIndex((q) => answers[q.id] === undefined);
     setIdx(firstOpen === -1 ? 0 : firstOpen); setStage("quiz");
   };
-  const restart = () => { setAnswers({}); setIdx(0); setUnlocked(false); setProfile({}); setStage("intro"); };
+  const restart = () => { setAnswers({}); setIdx(0); setUnlocked(false); setProfile({}); setCompany(""); setStage("intro"); };
 
   if (stage === "profile")
     return <Profile profile={profile} setProfile={setProfile} onExit={() => setStage("intro")}
@@ -57,7 +58,7 @@ export default function Assessment({ questions, config }) {
     return <Checkpoint dimension={questions[idx].dimension} questions={questions} result={result}
       onReview={() => setStage("quiz")} onContinue={() => { setIdx(idx + 1); setStage("quiz"); }} />;
   if (stage === "result" && result)
-    return <Result result={result} answers={answers} profile={profile} unlocked={unlocked} onUnlock={() => setUnlocked(true)} config={config}
+    return <Result result={result} answers={answers} profile={profile} company={company} questions={questions} unlocked={unlocked} onUnlock={(c) => { setCompany(c || ""); setUnlocked(true); }} config={config}
       onBack={() => { setIdx(questions.length - 1); setStage("quiz"); }} onRestart={restart} />;
   return (
     <>

@@ -3,10 +3,11 @@ import { useState } from "react";
 import Logo from "./Logo";
 import { BANDS, LEVELS } from "../lib/scoring";
 import { gapTo, serviceTier, temperature } from "../lib/funnel";
+import ReportBody from "./ReportBody";
 
 const AREA_COLOR = { Sustentabilidad: "leaf", Compliance: "peach", "Gestión de riesgos": "lilac" };
 
-function Gauge({ score }) {
+export function Gauge({ score }) {
   const r = 92, c = 2 * Math.PI * r;
   return (
     <svg className="gauge" viewBox="0 0 220 220" role="img" aria-label={`Puntaje ${Math.round(score)} de 100`}>
@@ -18,7 +19,7 @@ function Gauge({ score }) {
   );
 }
 
-export default function Result({ result, answers, profile, unlocked, onUnlock, config, onBack, onRestart }) {
+export default function Result({ result, answers, profile, company, questions, unlocked, onUnlock, config, onBack, onRestart }) {
   const { score, band, dimensions, alerts, actions } = result;
   const tier = serviceTier(score);
   const temp = temperature(profile, result);
@@ -60,19 +61,25 @@ export default function Result({ result, answers, profile, unlocked, onUnlock, c
           </div>
         )}
 
-        {actions.length === 0 ? (
+        {actions.length === 0 && (
           <div className="done-card"><h2>¡Excelente!</h2><p>Declaraste cumplimiento total en todas las áreas. Mantener las revisiones periódicas es la clave.</p></div>
+        )}
+        {unlocked || actions.length === 0 ? (
+          <>
+            <ReportBody questions={questions} answers={answers} company={company} dateLabel={new Date().toLocaleDateString("es-AR", { day: "numeric", month: "long", year: "numeric" })} showScore={false} />
+            <Contact config={config} tier={tier} />
+          </>
         ) : (
           <>
             <div className="plan-title">
               <div>
-                <p className="eyebrow">Plan de acción</p>
-                <h2>{actions.length} {actions.length === 1 ? "punto" : "puntos"} para mejorar, por prioridad.</h2>
+                <p className="eyebrow">Informe ejecutivo</p>
+                <h2>{actions.length} {actions.length === 1 ? "punto" : "puntos"} para mejorar, por criticidad.</h2>
               </div>
             </div>
-            <div className={`plan-wrap ${unlocked ? "" : "locked"}`}>
+            <div className="plan-wrap locked">
               <ol className="plan">
-                {actions.map(({ question: q, level, plan, priority }, i) => (
+                {actions.map(({ question: q, level, priority }, i) => (
                   <li className="plan-item" key={q.id}>
                     <span className="plan-n">{String(i + 1).padStart(2, "0")}</span>
                     <div>
@@ -81,17 +88,14 @@ export default function Result({ result, answers, profile, unlocked, onUnlock, c
                         <small>{q.dimension} · {LEVELS[level]}</small>
                       </div>
                       <h3>{q.topic}</h3>
-                      {unlocked ? <p>{plan}</p> : <p className="skel"><i /><i /><i /></p>}
+                      <p className="skel"><i /><i /><i /></p>
                     </div>
                   </li>
                 ))}
               </ol>
-              {!unlocked && (
-                <LeadForm count={actions.length} score={score} band={band} dimensions={dimensions} alerts={alerts}
-                  answers={answers} profile={profile} tier={tier} temp={temp} onUnlock={onUnlock} />
-              )}
+              <LeadForm count={actions.length} score={score} band={band} dimensions={dimensions} alerts={alerts}
+                answers={answers} profile={profile} tier={tier} temp={temp} onUnlock={onUnlock} />
             </div>
-            {unlocked && <Contact config={config} tier={tier} />}
           </>
         )}
       </div>
@@ -116,7 +120,7 @@ function LeadForm({ count, score, band, dimensions, alerts, answers, profile, ti
       });
       const out = await res.json().catch(() => ({}));
       if (!res.ok || !out.ok) throw new Error(out.error || "No pudimos enviar tus datos.");
-      onUnlock();
+      onUnlock(f.company);
     } catch (err) { setError(err.message); } finally { setBusy(false); }
   }
 

@@ -62,3 +62,44 @@ test("brecha al nivel satisfactorio y perfil completo", () => {
   assert.equal(profileComplete({ sector: "a", size: "b", urgency: "c" }), true);
   assert.equal(profileComplete({ sector: "a" }), false);
 });
+
+import { buildReport, criticalityOf, encodeAnswers, decodeAnswers, shareQuery, parseShareDate } from "../lib/report.js";
+test("criticidad por reglas", () => {
+  assert.equal(criticalityOf(10, 0), "critica"); // anticorrupción sin cumplimiento
+  assert.equal(criticalityOf(1, 0), "alta");
+  assert.equal(criticalityOf(1, 1), "media");
+  assert.equal(criticalityOf(1, 2), "baja");
+});
+test("informe: fortalezas, mejoras por criticidad y resumen", () => {
+  const a = { ...all(3), 10: 0, 3: 1, 4: 2, 7: 0 };
+  const r = buildReport(questions, a);
+  const g = Object.fromEntries(r.improvements.map((x) => [x.id, x.items.map((i) => i.question.id)]));
+  assert.deepEqual(g.critica, [10]);
+  assert.deepEqual(g.alta, [7]);
+  assert.deepEqual(g.media, [3]);
+  assert.deepEqual(g.baja, [4]);
+  assert.ok(r.strengths.length === 6 && r.strengths.every((s) => s.level === 3));
+  assert.ok(r.summary.lead.includes("sobre 100"));
+  assert.ok(r.summary.points.some((p) => p.includes("punto crítico")));
+  assert.ok(r.summary.points.some((p) => p.includes("4 mejoras")));
+});
+test("informe sin fortalezas totales usa las satisfactorias y sin alertas lo dice", () => {
+  const r = buildReport(questions, all(2));
+  assert.equal(r.strengths.length, 3);
+  assert.ok(r.strengths.every((s) => s.level === 2));
+  assert.ok(r.summary.points.some((p) => p.includes("No hay puntos críticos")));
+  assert.equal(buildReport(questions, all(0)).strengths.length, 0);
+});
+test("enlace compartible: ida y vuelta y validación", () => {
+  const a = Object.fromEntries(questions.map((q, i) => [q.id, i % 4]));
+  const s = encodeAnswers(questions, a);
+  assert.equal(s.length, 25);
+  assert.deepEqual(decodeAnswers(questions, s), a);
+  assert.equal(decodeAnswers(questions, s.slice(1)), null);
+  assert.equal(decodeAnswers(questions, "x".repeat(25)), null);
+  assert.equal(decodeAnswers(questions, "9".repeat(25)), null);
+  const q = new URLSearchParams(shareQuery(questions, a, "Minera Test SA", new Date("2026-11-11T12:00:00Z")));
+  assert.equal(q.get("e"), "Minera Test SA");
+  assert.equal(q.get("f"), "20261111");
+  assert.equal(parseShareDate("20261111"), "11 de noviembre de 2026");
+});
