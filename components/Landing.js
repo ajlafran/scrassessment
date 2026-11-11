@@ -1,5 +1,5 @@
 import Logo from "./Logo";
-import { DIMENSIONS } from "../lib/scoring";
+import { HeroArt, MockCard } from "./HeroArt";
 
 const AREAS = [
   { name: "Sustentabilidad", n: 8, color: "leaf", text: "Impacto ambiental y social, seguridad de las personas, derechos humanos y objetivos medibles." },
@@ -12,31 +12,6 @@ const FAQ = [
   ["¿Es una certificación?", "No. Es una autoevaluación basada en lo que declarás, pensada para detectar brechas antes de que las detecte un cliente minero."],
   ["¿Qué recibo al final?", "Un puntaje de 0 a 100, tu nivel en cada área, las alertas críticas y un plan de acción priorizado para cada punto a mejorar."],
 ];
-
-function PitArt() {
-  const rings = Array.from({ length: 9 }, (_, i) => i);
-  return (
-    <svg className="pit" viewBox="0 0 600 420" aria-hidden="true">
-      {rings.map((i) => (
-        <ellipse key={i} cx={300 + i * 4} cy={210 + i * 9} rx={270 - i * 28} ry={170 - i * 17}
-          fill={i % 2 ? "#3a3f3d" : "#2b2f2d"} stroke="#4b514e" strokeWidth="1.5" />
-      ))}
-      <ellipse cx="336" cy="288" rx="22" ry="11" fill="#97c680" opacity=".9" />
-    </svg>
-  );
-}
-
-function MockCard() {
-  return (
-    <div className="mock" aria-hidden="true">
-      <div className="mock-top"><span>Tu diagnóstico</span><b>Bueno</b></div>
-      <div className="mock-score">72<small>/100</small></div>
-      {[["Sustentabilidad", 78, "leaf"], ["Compliance", 66, "peach"], ["Gestión de riesgos", 72, "lilac"]].map(([n, v, c]) => (
-        <div className="mock-row" key={n}><span>{n}</span><i><u className={c} style={{ width: `${v}%` }} /></i></div>
-      ))}
-    </div>
-  );
-}
 
 export default function Landing({ onStart, resume, onRestart }) {
   return (
@@ -54,10 +29,10 @@ export default function Landing({ onStart, resume, onRestart }) {
       </header>
 
       <section className="hero">
-        <PitArt />
+        <HeroArt />
         <div className="hero-in">
           <p className="eyebrow light">Diagnóstico para proveedores mineros</p>
-          <h1>¿Está tu empresa lista para ser proveedor de la minería?</h1>
+          <h1 aria-label="¿Está tu empresa lista para ser proveedor de la minería?">{"¿Está tu empresa lista para ser proveedor de la minería?".split(" ").map((w, i) => <span className="w" aria-hidden="true" key={i} style={{ animationDelay: `${0.15 + i * 0.07}s` }}>{w}</span>)}</h1>
           <p className="hero-sub">Respondé 25 preguntas y conocé tu nivel de cumplimiento en Sustentabilidad, Compliance y Riesgos.</p>
           <div className="hero-cta">
             <button className="pill-btn white big" onClick={onStart}>{resume ? "Continuar diagnóstico" : "Comenzar diagnóstico"}</button>
