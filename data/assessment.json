@@ -1,0 +1,479 @@
+{
+ "questions": [
+  {
+   "id": 1,
+   "dimension": "Sustentabilidad",
+   "text": "¿La empresa cuenta con una política de sustentabilidad aprobada por la Dirección y comunicada a sus empleados y partes interesadas relevantes?",
+   "weight": 3.75,
+   "topic": "Política de sustentabilidad",
+   "criteria": [
+    "No hay política ni lineamientos documentados.",
+    "Hay compromisos informales o un borrador sin aprobación ni comunicación sistemática.",
+    "Política aprobada y comunicada internamente, pero con brechas de alcance, actualización o seguimiento.",
+    "Política aprobada por Dirección, comunicada a empleados y partes relevantes, con responsables y revisión periódica."
+   ],
+   "plans": [
+    "Designar un responsable y elaborar una política de sustentabilidad que establezca compromisos, alcance, responsabilidades y aprobación formal de la Dirección.",
+    "Completar el borrador, someterlo a aprobación, definir responsables y comunicarlo a empleados y partes interesadas prioritarias.",
+    "Revisar brechas de alcance y actualización; incorporar compromisos medibles, responsables y evidencia de comunicación.",
+    "Mantener revisión periódica, verificar comprensión y actualizar la política ante cambios relevantes del negocio o normativa."
+   ]
+  },
+  {
+   "id": 2,
+   "dimension": "Sustentabilidad",
+   "text": "¿Se identifican y evalúan los impactos ambientales derivados de las actividades, productos y servicios de la empresa?",
+   "weight": 3.75,
+   "topic": "Impactos ambientales",
+   "criteria": [
+    "No se identifican ni documentan impactos ambientales.",
+    "Se identifican algunos impactos de forma reactiva o sin método uniforme.",
+    "Evaluación documentada de los impactos principales, con algunas brechas de alcance o actualización.",
+    "Método sistemático y actualizado que cubre actividades, productos y servicios; impactos priorizados con responsables y medidas."
+   ],
+   "plans": [
+    "Realizar una identificación inicial de aspectos e impactos ambientales por actividad, sitio, producto y servicio; priorizar impactos significativos.",
+    "Completar el inventario de aspectos e impactos con metodología común, criterios de significancia, responsables y plan de evaluación.",
+    "Actualizar la evaluación para cubrir cambios operativos y sitios; reforzar seguimiento de impactos significativos y eficacia de medidas.",
+    "Mantener revisión anual y ante cambios; integrar resultados en decisiones, objetivos y controles operativos."
+   ]
+  },
+  {
+   "id": 3,
+   "dimension": "Sustentabilidad",
+   "text": "¿Existen procedimientos implementados para gestionar los residuos, reducir el consumo de agua y energía y prevenir la contaminación?",
+   "weight": 3.75,
+   "topic": "Residuos, agua, energía y contaminación",
+   "criteria": [
+    "No existen procedimientos ni controles relevantes.",
+    "Hay prácticas aisladas, registros incompletos y seguimiento limitado.",
+    "Procedimientos implementados para los principales aspectos y registros básicos; objetivos o cobertura parciales.",
+    "Procedimientos aplicados en las operaciones, registros e indicadores periódicos y revisión de eficacia para mejorar resultados."
+   ],
+   "plans": [
+    "Desarrollar procedimientos para residuos, agua, energía y prevención de contaminación; asignar responsables y controles operativos inmediatos.",
+    "Estandarizar prácticas existentes, completar registros y definir indicadores básicos de generación, consumo y eventos.",
+    "Cerrar brechas de cobertura, establecer metas y verificar periódicamente la aplicación de procedimientos.",
+    "Optimizar desempeño con análisis de tendencias, auditorías operativas y proyectos de reducción y prevención."
+   ]
+  },
+  {
+   "id": 4,
+   "dimension": "Sustentabilidad",
+   "text": "¿La empresa identifica y monitorea los requisitos legales y regulatorios ambientales aplicables a sus operaciones?",
+   "weight": 3.75,
+   "topic": "Requisitos legales ambientales",
+   "criteria": [
+    "No hay registro ni proceso para identificar obligaciones ambientales.",
+    "Revisión ocasional o reactiva, sin responsables ni seguimiento consistente.",
+    "Registro de requisitos y revisiones periódicas, con algunas brechas de actualización o evidencia.",
+    "Obligaciones actualizadas, responsables asignados, verificaciones periódicas y desvíos documentados con acciones correctivas."
+   ],
+   "plans": [
+    "Identificar requisitos ambientales aplicables y obligaciones de permisos; crear un registro legal con responsables y vencimientos prioritarios.",
+    "Formalizar la actualización periódica del registro, asignar responsables y establecer alertas y evidencias de cumplimiento.",
+    "Cerrar brechas de actualización y trazabilidad; documentar verificaciones y acciones correctivas de desvíos.",
+    "Mantener vigilancia regulatoria, verificaciones planificadas y reporte de cambios o incumplimientos a la Dirección."
+   ]
+  },
+  {
+   "id": 5,
+   "dimension": "Sustentabilidad",
+   "text": "¿Se identifican y gestionan los riesgos relacionados con la salud, la seguridad y las condiciones laborales de empleados y contratistas?",
+   "weight": 3.75,
+   "topic": "Salud, seguridad y condiciones laborales",
+   "criteria": [
+    "No se identifican ni gestionan sistemáticamente estos riesgos.",
+    "Controles básicos o reactivos; evaluaciones incompletas o cobertura irregular de contratistas.",
+    "Riesgos principales evaluados y controles implementados, con brechas menores en monitoreo o contratistas.",
+    "Evaluación de empleados y contratistas, controles verificados, incidentes investigados e indicadores y acciones monitoreados."
+   ],
+   "plans": [
+    "Realizar evaluación de riesgos de salud y seguridad por tarea y sitio; implementar controles críticos y atender riesgos graves de inmediato.",
+    "Completar evaluaciones, extender controles a contratistas y mejorar registros de inspecciones, incidentes y capacitación.",
+    "Reforzar verificación en campo, investigación de incidentes y seguimiento de indicadores y contratistas.",
+    "Mantener auditorías de controles críticos, simulacros, análisis de tendencias y mejora continua del desempeño H&S."
+   ]
+  },
+  {
+   "id": 6,
+   "dimension": "Sustentabilidad",
+   "text": "¿Existen políticas y controles para prevenir la discriminación, el acoso laboral y las prácticas contrarias a los derechos humanos?",
+   "weight": 3.75,
+   "topic": "Discriminación, acoso y derechos humanos",
+   "criteria": [
+    "No hay políticas, canales ni controles preventivos.",
+    "Hay declaraciones generales o mecanismos informales, sin procedimientos o protección suficiente.",
+    "Políticas y procedimientos comunicados; gestión de casos existente, pero capacitación o evaluación de eficacia parcial.",
+    "Políticas y controles claros, capacitación, canales accesibles, protección contra represalias, investigaciones y seguimiento."
+   ],
+   "plans": [
+    "Aprobar políticas contra discriminación, acoso y vulneraciones de derechos humanos; habilitar mecanismos seguros de consulta y denuncia.",
+    "Formalizar procedimientos de recepción e investigación, protección contra represalias y comunicación a toda la organización.",
+    "Ampliar capacitación y cobertura de terceros; medir conocimiento del canal y eficacia de la gestión de casos.",
+    "Mantener evaluación periódica de riesgos de derechos humanos, pruebas de accesibilidad del canal y revisión independiente de casos."
+   ]
+  },
+  {
+   "id": 7,
+   "dimension": "Sustentabilidad",
+   "text": "¿La empresa evalúa los impactos sociales de sus operaciones y mantiene mecanismos de diálogo y atención de reclamos de las comunidades y otras partes interesadas?",
+   "weight": 3.75,
+   "topic": "Impactos sociales y comunidades",
+   "criteria": [
+    "No se evalúan impactos sociales ni hay canales de diálogo o reclamos.",
+    "Se atienden asuntos de manera reactiva, sin registro o seguimiento consistente.",
+    "Impactos principales identificados y canales establecidos, aunque el análisis y seguimiento son parciales.",
+    "Proceso documentado de evaluación, diálogo, registro y resolución de reclamos y monitoreo de compromisos."
+   ],
+   "plans": [
+    "Identificar comunidades y partes interesadas afectadas; establecer un canal accesible para consultas, reclamos y situaciones urgentes.",
+    "Crear registro de partes interesadas y reclamos, definir responsables, plazos de respuesta y mecanismo de escalamiento.",
+    "Completar análisis de impactos y documentar acuerdos, cierres y seguimiento de compromisos comunitarios.",
+    "Mantener diálogo planificado, evaluar efectividad de respuestas y reportar tendencias y compromisos pendientes."
+   ]
+  },
+  {
+   "id": 8,
+   "dimension": "Sustentabilidad",
+   "text": "¿Se establecen objetivos e indicadores de sustentabilidad y se monitorean periódicamente sus resultados?",
+   "weight": 3.75,
+   "topic": "Objetivos e indicadores de sustentabilidad",
+   "criteria": [
+    "No hay objetivos ni indicadores.",
+    "Existen datos u objetivos aislados sin metas, responsables o revisión regular.",
+    "Hay objetivos e indicadores para temas relevantes, aunque faltan metas o responsables en algunos casos.",
+    "Metas medibles, responsables y líneas de base definidas; indicadores revisados periódicamente y utilizados para mejorar."
+   ],
+   "plans": [
+    "Definir objetivos iniciales de sustentabilidad e indicadores prioritarios, con línea de base y responsables.",
+    "Convertir iniciativas aisladas en metas medibles; definir frecuencia de medición, fuentes de datos y responsables.",
+    "Completar metas, líneas de base o responsables faltantes y vincular resultados con planes de mejora.",
+    "Mantener tablero de indicadores, revisión gerencial y actualización de metas según desempeño y contexto."
+   ]
+  },
+  {
+   "id": 9,
+   "dimension": "Compliance",
+   "text": "¿La empresa cuenta con un Código de Ética y Conducta formalmente aprobado, comunicado y aplicable a empleados, directivos y terceros relevantes?",
+   "weight": 3.75,
+   "topic": "Código de Ética y Conducta",
+   "criteria": [
+    "No existe Código de Ética y Conducta formal.",
+    "Documento informal, desactualizado o difundido limitadamente.",
+    "Código aprobado y comunicado a empleados y directivos, con cobertura o actualización parcialmente incompleta.",
+    "Código vigente aprobado, aplicable a empleados, directivos y terceros relevantes, comunicado y revisado periódicamente."
+   ],
+   "plans": [
+    "Desarrollar y aprobar un Código de Ética y Conducta con reglas, responsabilidades y mecanismos de consulta y denuncia.",
+    "Actualizar el documento, obtener aprobación formal y planificar comunicación y aceptación de empleados y terceros relevantes.",
+    "Cerrar brechas de cobertura, accesibilidad, traducción o actualización; reforzar constancias de recepción.",
+    "Mantener revisión periódica, evaluación de comprensión y actualización ante cambios regulatorios o de riesgos."
+   ]
+  },
+  {
+   "id": 10,
+   "dimension": "Compliance",
+   "text": "¿Existen políticas y controles para prevenir el soborno, la corrupción, los conflictos de intereses y los pagos indebidos?",
+   "weight": 3.75,
+   "topic": "Anticorrupción y conflictos de intereses",
+   "criteria": [
+    "No hay políticas ni controles específicos.",
+    "Prohibiciones generales sin evaluación de riesgos, declaraciones o controles claros.",
+    "Políticas y controles principales implementados; cobertura o monitoreo de eficacia parcial.",
+    "Programa basado en riesgos con controles sobre soborno, pagos, regalos, conflictos, terceros, capacitación y monitoreo."
+   ],
+   "plans": [
+    "Realizar evaluación de riesgos de corrupción y conflictos; aprobar controles sobre regalos, hospitalidad, donaciones, pagos y terceros.",
+    "Formalizar declaraciones de conflictos, autorizaciones y controles; priorizar áreas y transacciones de mayor exposición.",
+    "Extender controles a terceros y procesos expuestos; probar su operación y mejorar el monitoreo de excepciones.",
+    "Mantener evaluación basada en riesgos, pruebas independientes, análisis de alertas y actualización de controles."
+   ]
+  },
+  {
+   "id": 11,
+   "dimension": "Compliance",
+   "text": "¿Se identifican y monitorean las obligaciones legales, regulatorias y contractuales aplicables a las actividades de la empresa?",
+   "weight": 3.75,
+   "topic": "Obligaciones legales, regulatorias y contractuales",
+   "criteria": [
+    "No existe proceso para identificar ni monitorear obligaciones.",
+    "La identificación depende de personas o revisiones ocasionales; registro incompleto.",
+    "Registro de obligaciones y responsables con revisiones periódicas, aunque hay brechas de actualización o evidencia.",
+    "Proceso actualizado para detectar cambios, asignar responsables, verificar cumplimiento y documentar desvíos y remediación."
+   ],
+   "plans": [
+    "Identificar obligaciones legales, regulatorias y contractuales críticas y asignar responsables para su cumplimiento inmediato.",
+    "Completar un registro de obligaciones, establecer calendario de revisión y alertas de vencimiento.",
+    "Cerrar brechas de actualización, evidencia y cobertura de contratos; documentar controles y remediaciones.",
+    "Mantener vigilancia de cambios normativos, certificaciones de cumplimiento y reporte de desvíos y tendencias."
+   ]
+  },
+  {
+   "id": 12,
+   "dimension": "Compliance",
+   "text": "¿Existe un canal confidencial de denuncias que permita reportar irregularidades y proteja a quienes denuncian de buena fe contra represalias?",
+   "weight": 3.75,
+   "topic": "Canal de denuncias",
+   "criteria": [
+    "No existe canal para reportar irregularidades.",
+    "Se usan vías informales o poco conocidas, sin garantías claras de confidencialidad o no represalia.",
+    "Canal comunicado con reglas de confidencialidad, aunque accesibilidad o seguimiento puede mejorarse.",
+    "Canal accesible y confidencial, protocolo de gestión, protección contra represalias y monitoreo de casos y tiempos."
+   ],
+   "plans": [
+    "Implementar un canal de denuncias confidencial, accesible y con opción de anonimato cuando corresponda; establecer protección contra represalias.",
+    "Formalizar protocolo, responsables independientes, plazos, confidencialidad y comunicación del canal.",
+    "Mejorar accesibilidad, confianza y seguimiento; medir conocimiento, tiempos de respuesta y calidad de cierre.",
+    "Mantener pruebas de funcionamiento, evaluación de confianza, análisis de tendencias y supervisión del tratamiento de casos."
+   ]
+  },
+  {
+   "id": 13,
+   "dimension": "Compliance",
+   "text": "¿Se investigan las denuncias e incumplimientos identificados y se implementan acciones correctivas con seguimiento documentado?",
+   "weight": 3.75,
+   "topic": "Investigaciones y acciones correctivas",
+   "criteria": [
+    "No se investigan sistemáticamente denuncias ni se documentan acciones.",
+    "Respuesta ad hoc, sin protocolo uniforme ni seguimiento de cierre.",
+    "Procedimiento y registro de acciones existentes, pero análisis de causa raíz o verificación de eficacia parcial.",
+    "Investigaciones oportunas y documentadas, causa raíz, responsables y plazos, verificación de eficacia y reporte agregado."
+   ],
+   "plans": [
+    "Aprobar un protocolo de investigación y acciones correctivas; revisar los casos abiertos y contener riesgos urgentes.",
+    "Estandarizar registro, asignación, plazos y documentación; incorporar análisis de causa raíz.",
+    "Completar verificación de eficacia y seguimiento de acciones vencidas; mejorar consistencia de los expedientes.",
+    "Mantener análisis de recurrencia, control de calidad de investigaciones y reporte agregado a los órganos de gobierno."
+   ]
+  },
+  {
+   "id": 14,
+   "dimension": "Compliance",
+   "text": "¿La empresa realiza procesos de debida diligencia de compliance sobre proveedores, contratistas, socios comerciales e intermediarios, según su nivel de riesgo?",
+   "weight": 3.75,
+   "topic": "Debida diligencia de terceros",
+   "criteria": [
+    "No se evalúan terceros en materia de compliance.",
+    "Revisiones informales o uniformes sin enfoque basado en riesgo.",
+    "Debida diligencia aplicada a terceros relevantes; actualización o monitoreo posterior parcial.",
+    "Proceso proporcional al riesgo con evaluación previa, escalamiento, cláusulas, actualización y seguimiento de alertas."
+   ],
+   "plans": [
+    "Clasificar terceros por criticidad y realizar debida diligencia inicial de proveedores, contratistas, intermediarios y socios de mayor riesgo.",
+    "Formalizar cuestionarios, verificaciones, aprobaciones y cláusulas contractuales; ampliar gradualmente la cobertura.",
+    "Mejorar actualización periódica y monitoreo posterior; cerrar brechas de documentación y escalamiento.",
+    "Mantener monitoreo continuo basado en riesgo, reevaluaciones por eventos y controles de salida o suspensión."
+   ]
+  },
+  {
+   "id": 15,
+   "dimension": "Compliance",
+   "text": "¿Se realizan capacitaciones periódicas sobre ética, compliance, prevención de la corrupción y obligaciones regulatorias?",
+   "weight": 3.75,
+   "topic": "Capacitación en ética y compliance",
+   "criteria": [
+    "No se realizan capacitaciones ni comunicaciones.",
+    "Comunicaciones ocasionales sin plan, cobertura o registros confiables.",
+    "Plan periódico y registros para grupos relevantes, aunque se evalúa parcialmente la comprensión o cobertura.",
+    "Programa basado en riesgos y roles, periódico, con registros, evaluación de comprensión y seguimiento de eficacia."
+   ],
+   "plans": [
+    "Diseñar un plan básico de capacitación en ética y compliance y cubrir primero funciones expuestas y personal directivo.",
+    "Definir calendario, contenidos, audiencias y registros; asegurar cobertura de ingresos y contratistas relevantes.",
+    "Incorporar evaluaciones de comprensión y seguimiento de cobertura; adaptar contenidos a roles de mayor riesgo.",
+    "Mantener formación basada en riesgos, refrescos periódicos y medición de eficacia y cambios de conducta."
+   ]
+  },
+  {
+   "id": 16,
+   "dimension": "Compliance",
+   "text": "¿La Dirección y los órganos de gobierno reciben información periódica sobre riesgos de incumplimiento, incidentes y planes de remediación?",
+   "weight": 3.75,
+   "topic": "Reporte de compliance a Dirección",
+   "criteria": [
+    "No se reportan riesgos, incidentes ni remediaciones.",
+    "Reportes reactivos o informales, sin métricas ni seguimiento consistente.",
+    "Reportes periódicos sobre temas principales, con brechas en oportunidad, indicadores o seguimiento.",
+    "Reportes trazables y periódicos sobre incidentes, tendencias y remediación; decisiones y acciones documentadas."
+   ],
+   "plans": [
+    "Establecer un reporte inicial a Dirección sobre incidentes, riesgos de incumplimiento y remediaciones urgentes.",
+    "Definir frecuencia, formato, responsables e indicadores mínimos; mantener registro de decisiones y acciones.",
+    "Mejorar oportunidad, tendencias y trazabilidad; incorporar seguimiento de acciones y métricas de exposición.",
+    "Mantener reportes periódicos orientados a decisiones, análisis de tendencias y seguimiento de compromisos de gobierno."
+   ]
+  },
+  {
+   "id": 17,
+   "dimension": "Gestión de riesgos",
+   "text": "¿La empresa cuenta con una política y una metodología formal de gestión integral de riesgos aprobadas por la Dirección?",
+   "weight": 4.4444,
+   "topic": "Política y metodología de riesgos",
+   "criteria": [
+    "No hay política ni metodología formal de riesgos.",
+    "Gestión informal o metodologías dispares sin aprobación ni roles claros.",
+    "Política y metodología documentadas y aprobadas, con brechas de aplicación o integración.",
+    "Marco aprobado, roles y criterios de apetito/tolerancia definidos, metodología consistente e integrada en decisiones."
+   ],
+   "plans": [
+    "Designar patrocinador y responsable de riesgos; desarrollar política, metodología, roles y criterios comunes de evaluación.",
+    "Formalizar y aprobar el marco; aclarar responsabilidades, apetito/tolerancia y calendario de implementación.",
+    "Extender aplicación a áreas y decisiones relevantes; alinear criterios y mejorar integración con planificación y presupuesto.",
+    "Mantener revisión del marco, evaluar madurez y asegurar su integración en estrategia, inversiones y desempeño."
+   ]
+  },
+  {
+   "id": 18,
+   "dimension": "Gestión de riesgos",
+   "text": "¿Se identifican y evalúan sistemáticamente los riesgos estratégicos, operativos, financieros, tecnológicos, ambientales y de compliance?",
+   "weight": 4.4444,
+   "topic": "Identificación y evaluación de riesgos",
+   "criteria": [
+    "No hay proceso sistemático de identificación y evaluación.",
+    "Se identifican riesgos en algunas áreas o después de eventos, con cobertura irregular.",
+    "Evaluaciones periódicas de categorías y áreas principales, aunque la cobertura no es completa.",
+    "Proceso documentado y periódico que cubre riesgos estratégicos, operativos, financieros, tecnológicos, ambientales y compliance."
+   ],
+   "plans": [
+    "Realizar talleres iniciales para identificar riesgos estratégicos, operativos, financieros, tecnológicos, ambientales y de compliance.",
+    "Completar cobertura de áreas y categorías; establecer frecuencia, responsables y actualización ante cambios o incidentes.",
+    "Mejorar profundidad y consistencia de evaluaciones y documentar causas, consecuencias y controles existentes.",
+    "Mantener evaluación periódica y dinámica, incluyendo escenarios emergentes y validación por responsables de negocio."
+   ]
+  },
+  {
+   "id": 19,
+   "dimension": "Gestión de riesgos",
+   "text": "¿Existe una matriz de riesgos que contemple la probabilidad de ocurrencia, el impacto potencial y la priorización de los riesgos identificados?",
+   "weight": 4.4444,
+   "topic": "Matriz de riesgos",
+   "criteria": [
+    "No existe matriz ni criterios de evaluación.",
+    "Hay listados o evaluaciones aisladas sin escalas consistentes de probabilidad e impacto.",
+    "Matriz con criterios definidos y priorización, pero con brechas de actualización o consistencia.",
+    "Matriz vigente con criterios homogéneos, evaluación inherente/residual cuando aplica, responsables y actualización ante cambios."
+   ],
+   "plans": [
+    "Crear una matriz de riesgos con escalas definidas de probabilidad e impacto y un primer inventario de riesgos prioritarios.",
+    "Unificar criterios, completar responsables y controles y establecer una frecuencia de actualización.",
+    "Mejorar evaluación inherente y residual, consistencia de puntuación y trazabilidad de cambios.",
+    "Mantener matriz integrada con apetito/tolerancia, indicadores, eventos y decisiones; revisar ante cambios significativos."
+   ]
+  },
+  {
+   "id": 20,
+   "dimension": "Gestión de riesgos",
+   "text": "¿Se definen responsables, planes de acción y plazos para tratar los riesgos prioritarios, y se monitorea su implementación?",
+   "weight": 4.4444,
+   "topic": "Planes de tratamiento de riesgos",
+   "criteria": [
+    "No se asignan responsables ni acciones para riesgos prioritarios.",
+    "Acciones propuestas sin responsables, plazos o seguimiento regular.",
+    "Riesgos prioritarios tienen acciones, responsables y plazos; seguimiento parcial o atrasos no resueltos.",
+    "Planes priorizados con responsables, plazos, recursos e indicadores; avance y eficacia monitoreados y atrasos escalados."
+   ],
+   "plans": [
+    "Definir acciones inmediatas para riesgos prioritarios, asignando un responsable ejecutivo y una fecha objetivo.",
+    "Completar planes con hitos, recursos, responsables y fechas; establecer seguimiento periódico y escalamiento de atrasos.",
+    "Mejorar medición de avance y eficacia; resolver acciones vencidas y documentar aceptación de riesgos cuando corresponda.",
+    "Mantener seguimiento de beneficios y reducción de exposición; validar cierres y actualizar planes ante cambios."
+   ]
+  },
+  {
+   "id": 21,
+   "dimension": "Gestión de riesgos",
+   "text": "¿Los riesgos se evalúan considerando la eficacia de los controles existentes y el nivel de riesgo residual resultante?",
+   "weight": 4.4444,
+   "topic": "Controles y riesgo residual",
+   "criteria": [
+    "No se identifican controles ni se evalúa riesgo residual.",
+    "Se enumeran controles sin verificar consistentemente su diseño u operación.",
+    "Controles clave y riesgo residual evaluados para riesgos principales; pruebas o periodicidad parciales.",
+    "Controles documentados y probados periódicamente; resultados sustentan el riesgo residual y planes de mejora."
+   ],
+   "plans": [
+    "Identificar controles clave para riesgos prioritarios y evaluar inicialmente si están diseñados y operan.",
+    "Documentar controles, propietarios y frecuencia; comenzar pruebas de diseño y funcionamiento.",
+    "Ampliar pruebas y evidencia; ajustar la evaluación del riesgo residual según resultados y excepciones.",
+    "Mantener programa de pruebas basado en riesgo, seguimiento de deficiencias y validación independiente de controles clave."
+   ]
+  },
+  {
+   "id": 22,
+   "dimension": "Gestión de riesgos",
+   "text": "¿Existen indicadores clave de riesgo (KRI) y mecanismos de monitoreo que permitan anticipar desviaciones y cambios en la exposición al riesgo?",
+   "weight": 4.4444,
+   "topic": "Indicadores clave de riesgo (KRI)",
+   "criteria": [
+    "No existen KRI ni mecanismos de alerta.",
+    "Hay indicadores sin umbrales, responsables o respuestas definidas.",
+    "KRI para riesgos relevantes con umbrales y revisión periódica; datos o acciones asociadas parcialmente desarrollados.",
+    "KRI con fuentes y responsables, umbrales, tendencias, escalamiento y respuestas documentadas ante desviaciones."
+   ],
+   "plans": [
+    "Definir KRI para los riesgos más relevantes y establecer datos mínimos, responsables y frecuencia de seguimiento.",
+    "Fijar umbrales, tolerancias y respuestas ante alertas; mejorar calidad y confiabilidad de datos.",
+    "Completar escalamiento y planes de respuesta; revisar si los indicadores anticipan efectivamente cambios de exposición.",
+    "Mantener tablero de KRI, análisis de tendencias, calibración de umbrales y seguimiento de acciones preventivas."
+   ]
+  },
+  {
+   "id": 23,
+   "dimension": "Gestión de riesgos",
+   "text": "¿Se dispone de planes de continuidad del negocio y recuperación ante desastres para los procesos y sistemas críticos?",
+   "weight": 4.4444,
+   "topic": "Continuidad del negocio y recuperación",
+   "criteria": [
+    "No se identifican procesos críticos ni existen planes.",
+    "Planes informales o incompletos, sin análisis de impacto ni pruebas.",
+    "Procesos críticos identificados y planes documentados, pero pruebas, actualización o dependencias son parciales.",
+    "Análisis de impacto, planes aprobados, roles y recursos, pruebas periódicas, lecciones aprendidas y recuperación tecnológica cuando aplica."
+   ],
+   "plans": [
+    "Identificar procesos y sistemas críticos y realizar un análisis de impacto al negocio para determinar prioridades de recuperación.",
+    "Documentar planes, roles, contactos, recursos y dependencias; programar pruebas iniciales.",
+    "Ampliar pruebas de continuidad y recuperación tecnológica; actualizar planes y cerrar hallazgos.",
+    "Mantener pruebas periódicas integrales, lecciones aprendidas y actualización ante cambios de procesos, sistemas o proveedores."
+   ]
+  },
+  {
+   "id": 24,
+   "dimension": "Gestión de riesgos",
+   "text": "¿Se realizan evaluaciones periódicas de riesgos de terceros, cadena de suministro, ciberseguridad y dependencia de proveedores críticos?",
+   "weight": 4.4444,
+   "topic": "Terceros, cadena de suministro y ciberseguridad",
+   "criteria": [
+    "No se evalúan estos riesgos ni dependencias críticas.",
+    "Revisiones aisladas sin clasificación de criticidad ni seguimiento regular.",
+    "Riesgos principales evaluados, incluida ciberseguridad cuando aplica; periodicidad o contingencias parciales.",
+    "Proceso basado en criticidad que cubre terceros, dependencias, requisitos contractuales, ciberseguridad, continuidad y reevaluación."
+   ],
+   "plans": [
+    "Identificar proveedores y terceros críticos, dependencias relevantes y principales exposiciones de ciberseguridad y continuidad.",
+    "Clasificar terceros por criticidad y definir evaluaciones, requisitos contractuales y revisiones periódicas.",
+    "Completar planes de contingencia y monitoreo de terceros críticos; reforzar evaluaciones de ciberseguridad.",
+    "Mantener monitoreo por criticidad, pruebas de contingencia, reevaluación por incidentes y seguimiento de planes de salida."
+   ]
+  },
+  {
+   "id": 25,
+   "dimension": "Gestión de riesgos",
+   "text": "¿Se reportan periódicamente los riesgos relevantes, incidentes y pérdidas potenciales a la Dirección, y se actualizan los planes de mitigación en función de los resultados?",
+   "weight": 4.4444,
+   "topic": "Reporte de riesgos e incidentes",
+   "criteria": [
+    "No se reportan riesgos regularmente ni se actualizan mitigaciones.",
+    "Reporte principalmente reactivo tras incidentes, sin frecuencia ni seguimiento consistentes.",
+    "Reporte periódico de riesgos e incidentes y actualización de algunos planes, con trazabilidad o análisis de tendencias parcial.",
+    "Reportes con exposición, incidentes, pérdidas potenciales y tendencias; cambios disparan reevaluación y planes actualizados con seguimiento de eficacia."
+   ],
+   "plans": [
+    "Establecer un mecanismo de reporte periódico de riesgos e incidentes a la Dirección y actualizar las mitigaciones prioritarias.",
+    "Definir calendario, contenido, responsables y seguimiento de acuerdos; incorporar incidentes y pérdidas potenciales.",
+    "Mejorar análisis de tendencias, trazabilidad y actualización de planes a partir de incidentes y resultados.",
+    "Mantener reportes integrados y orientados a decisiones, con revisión de eficacia de mitigaciones y escalamiento oportuno."
+   ]
+  }
+ ]
+}
