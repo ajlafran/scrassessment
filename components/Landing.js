@@ -1,6 +1,6 @@
 "use client";
 import Logo from "./Logo";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { HeroArt, MockCard } from "./HeroArt";
 import data from "../data/assessment.json";
 import { PHOTOS } from "../lib/photos";
@@ -22,6 +22,64 @@ const FAQ = [
   ["¿Es una certificación?", "No. Es una autoevaluación basada en lo que declarás, pensada para detectar brechas antes de que las detecte un cliente minero."],
   ["¿Qué recibo al final?", "Un puntaje de 0 a 100, tu nivel en cada área, las alertas críticas y un plan de acción priorizado para cada punto a mejorar."],
 ];
+
+function useInView() {
+  const ref = useRef(null);
+  const [seen, setSeen] = useState(false);
+  useEffect(() => {
+    const el = ref.current; if (!el) return;
+    if (typeof IntersectionObserver === "undefined" || matchMedia("(prefers-reduced-motion: reduce)").matches) { setSeen(true); return; }
+    const io = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setSeen(true); io.disconnect(); } }, { threshold: 0.3 });
+    io.observe(el); return () => io.disconnect();
+  }, []);
+  return [ref, seen];
+}
+
+function ReportSection({ onStart, resume }) {
+  const [ref, seen] = useInView();
+  const [n, setN] = useState(0);
+  useEffect(() => {
+    if (!seen) return;
+    let raf, t0;
+    const tick = (ts) => { t0 ??= ts; const p = Math.min((ts - t0) / 1400, 1); setN(Math.round(72 * (1 - Math.pow(1 - p, 3)))); if (p < 1) raf = requestAnimationFrame(tick); };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [seen]);
+  const bars = [["Sustentabilidad", 78, "leaf"], ["Compliance", 66, "peach"], ["Gestión de riesgos", 72, "lilac"]];
+  return (
+    <section className="report-wrap" ref={ref}>
+      <div className="report" style={{ backgroundImage: `url(/photos/report.jpg)` }}>
+        <div className="report-in">
+          <div className="report-copy">
+            <p className="eyebrow leaf">El informe</p>
+            <h2>Un informe que se entiende <span>de un vistazo.</span></h2>
+            <p className="report-p">Sin planillas ni jerga: tu nivel, lo que te puede dejar afuera y qué hacer primero.</p>
+            <button className="link-arrow light" onClick={onStart}>{resume ? "Continuar diagnóstico" : "Comenzar diagnóstico"} <span aria-hidden="true">→</span></button>
+          </div>
+          <div className={`glass ${seen ? "in" : ""}`} aria-hidden="true">
+            <div className="glass-top"><span>Tu diagnóstico</span><b>Nivel Bueno</b></div>
+            <div className="glass-score">{n}<small>/100</small><em>Meta · 80</em></div>
+            <div className="glass-bars">
+              {bars.map(([name, v, c], i) => (
+                <div key={name}><span>{name}</span><i><u className={c} style={{ width: seen ? `${v}%` : "0%", transitionDelay: `${0.2 + i * 0.15}s` }} /></i><b>{v}</b></div>
+              ))}
+            </div>
+            <div className="glass-rows">
+              <div><span className="gdot bad" /><p><strong>Alerta crítica</strong>Canal de denuncias sin ningún nivel de cumplimiento</p></div>
+              <div><span className="gdot warn" /><p><strong>Prioridad alta · Canal de denuncias</strong>Implementar un canal confidencial con protocolo y plazos</p></div>
+              <div><span className="gdot ok" /><p><strong>Próximo paso</strong>Acompañamiento para cerrar brechas</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="stats">
+        {[["25", "preguntas con niveles descriptos"], ["3", "áreas que miran las mineras"], ["1", "plan de acción priorizado"]].map(([k, t]) => (
+          <div key={k}><b>{k}</b><span>{t}</span></div>
+        ))}
+      </div>
+    </section>
+  );
+}
 
 function AreasPanel() {
   const track = useRef(null);
@@ -125,16 +183,7 @@ export default function Landing({ onStart, resume, onRestart }) {
 
       <AreasPanel />
 
-      <section className="showcase">
-        <h2>Un informe que se entiende <span className="hl">de un vistazo</span>.</h2>
-        <p className="showcase-sub">Sin planillas ni jerga: tu nivel, lo que te puede dejar afuera y qué hacer primero.</p>
-        <div className="panel panel-photo" style={{ backgroundImage: `url(${PHOTOS.team.src})` }}>
-          <div className="fc fc-score"><span>Puntaje global</span><b>72<small>/100</small></b><i><u style={{ width: "72%" }} /></i><em>Nivel Bueno · meta 80</em></div>
-          <div className="fc fc-alert"><strong>⚠ Alerta crítica</strong><span>Canal de denuncias sin ningún nivel de cumplimiento</span></div>
-          <div className="fc fc-plan"><span className="prio Alta">Prioridad Alta</span><strong>Canal de denuncias</strong><span>Implementar un canal confidencial y accesible, con protocolo de gestión y plazos.</span></div>
-          <div className="fc fc-next"><span>Próximo paso</span><strong>Acompañamiento para cerrar brechas</strong></div>
-        </div>
-      </section>
+      <ReportSection onStart={onStart} resume={resume} />
 
       <section className="compare">
         <h2>Tres formas de llegar a saber qué te falta. <span className="hl">Una es la rápida.</span></h2>
