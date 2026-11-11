@@ -1,6 +1,6 @@
 "use client";
 import Logo from "./Logo";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { HeroArt, MockCard } from "./HeroArt";
 import data from "../data/assessment.json";
 import { PHOTOS } from "../lib/photos";
@@ -24,24 +24,54 @@ const FAQ = [
 ];
 
 function AreasPanel() {
-  const [open, setOpen] = useState(-1);
+  const track = useRef(null);
+  const drag = useRef({ on: false, x: 0, left: 0, moved: false });
+  const [dragging, setDragging] = useState(false);
+
+  const scrollByCard = (dir) => {
+    const el = track.current; if (!el) return;
+    const card = el.querySelector(".pcard");
+    el.scrollBy({ left: dir * (card.offsetWidth + 24), behavior: "smooth" });
+  };
+  const onDown = (e) => {
+    if (e.pointerType !== "mouse") return; // en pantallas táctiles se desliza nativamente
+    drag.current = { on: true, x: e.clientX, left: track.current.scrollLeft, moved: false };
+    setDragging(true);
+  };
+  const onMove = (e) => {
+    const d = drag.current; if (!d.on) return;
+    const dx = e.clientX - d.x;
+    if (Math.abs(dx) > 4) d.moved = true;
+    track.current.scrollLeft = d.left - dx;
+  };
+  const onUp = () => { drag.current.on = false; setDragging(false); };
+
   return (
     <section className="areas3" id="areas">
       <div className="areas3-head">
-        <p className="eyebrow">Qué evaluamos</p>
-        <h2>Tres áreas. <span className="hl">Un solo puntaje.</span></h2>
+        <div>
+          <p className="eyebrow">Qué evaluamos</p>
+          <h2>Tres áreas. <span className="hl">Un solo puntaje.</span></h2>
+        </div>
+        <div className="arrows">
+          <button aria-label="Anterior" onClick={() => scrollByCard(-1)}>←</button>
+          <button aria-label="Siguiente" onClick={() => scrollByCard(1)}>→</button>
+        </div>
       </div>
-      <div className="photo-row">
+      <div className={`carousel ${dragging ? "dragging" : ""}`} ref={track} onPointerDown={onDown} onPointerMove={onMove}
+        onPointerUp={onUp} onPointerLeave={onUp} onDragStart={(e) => e.preventDefault()}>
         {AREAS.map((a, i) => (
           <article className="pcard" key={a.name}>
-            <button className={`pimg ${open === i ? "open" : ""}`} aria-expanded={open === i}
-              aria-label={`Ver los ${a.topics.length} puntos de ${a.name}`} onClick={() => setOpen(open === i ? -1 : i)}>
-              <img src={PHOTOS.areas[a.name].src} alt={PHOTOS.areas[a.name].alt} loading="lazy" />
+            <div className="pimg">
+              <img src={PHOTOS.areas[a.name].src} alt={PHOTOS.areas[a.name].alt} loading="lazy" draggable="false" />
               <span className="ptag">{String(i + 1).padStart(2, "0")} · {a.topics.length} puntos</span>
-              <span className="pover"><ul>{a.topics.map((t) => <li key={t}>{t}</li>)}</ul></span>
-            </button>
+            </div>
             <h3>{a.name}</h3>
             <p>{a.text}</p>
+            <details>
+              <summary>Ver los {a.topics.length} puntos</summary>
+              <ul>{a.topics.map((t) => <li key={t}>{t}</li>)}</ul>
+            </details>
           </article>
         ))}
       </div>
