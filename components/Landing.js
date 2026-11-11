@@ -1,7 +1,7 @@
 "use client";
 import Logo from "./Logo";
 import { useEffect, useRef, useState } from "react";
-import { HeroArt, MockCard } from "./HeroArt";
+import { HeroArt } from "./HeroArt";
 import data from "../data/assessment.json";
 import { PHOTOS } from "../lib/photos";
 
@@ -153,18 +153,20 @@ export default function Landing({ onStart, resume, onRestart }) {
       </header>
 
       <section className="hero">
-        <HeroArt />
         <div className="hero-in">
-          <p className="eyebrow light">Diagnóstico para proveedores mineros</p>
+          <p className="eyebrow light kicker">N.º 01 — Diagnóstico para proveedores mineros</p>
           <h1 aria-label="¿Está tu empresa lista para ser proveedor de la minería?">{"¿Está tu empresa lista para ser proveedor de la minería?".split(" ").map((w, i) => <span className="w" aria-hidden="true" key={i} style={{ animationDelay: `${0.15 + i * 0.07}s` }}>{w}</span>)}</h1>
-          <p className="hero-sub">Respondé 25 preguntas y conocé tu nivel de cumplimiento en Sustentabilidad, Compliance y Riesgos.</p>
-          <div className="hero-cta">
-            <button className="pill-btn white big" onClick={onStart}>{resume ? "Continuar diagnóstico" : "Comenzar diagnóstico"}</button>
-            {resume && <button className="link-arrow light" onClick={onRestart}>Empezar de nuevo</button>}
-            {!resume && <a className="link-arrow light" href="#como">Ver cómo funciona <span aria-hidden="true">→</span></a>}
+          <div className="hero-row">
+            <p className="hero-sub">Respondé 25 preguntas y conocé tu nivel de cumplimiento en Sustentabilidad, Compliance y Riesgos.</p>
+            <div className="hero-cta">
+              <button className="pill-btn white big" onClick={onStart}>{resume ? "Continuar diagnóstico" : "Comenzar diagnóstico"}</button>
+              {resume && <button className="link-arrow light" onClick={onRestart}>Empezar de nuevo</button>}
+              {!resume && <a className="link-arrow light" href="#como">Ver cómo funciona <span aria-hidden="true">→</span></a>}
+            </div>
           </div>
         </div>
-        <MockCard />
+        <HeroArt />
+        <p className="hero-cap"><b>Fig. 01</b> Mina a cielo abierto, vista aérea</p>
         <div className="wordmark" aria-hidden="true">SCR<sup>®</sup></div>
       </section>
 
