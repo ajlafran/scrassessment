@@ -14,6 +14,11 @@ function spiralPath() {
   return "M" + pts.map(([x, y]) => `${x.toFixed(1)} ${y.toFixed(1)}`).join(" L");
 }
 const SPIRAL = spiralPath();
+// Tres nodos (uno por área) sobre el borde de anillos de la mina
+const NODES = [["01", "SUSTENTABILIDAD", 0, -235], ["02", "COMPLIANCE", 2, -35], ["03", "RIESGOS", 1, 135]].map(([num, label, i, dx]) => {
+  const rx = 285 - i * 29, ry = 178 - i * 17, cy = CY + i * 9, cx = CX + i * 4;
+  return { num, label, x: cx + dx, y: cy - ry * Math.sqrt(1 - (dx / rx) ** 2) };
+});
 
 export function HeroArt() {
   const ref = useRef(null);
@@ -31,7 +36,7 @@ export function HeroArt() {
 
   return (
     <div className="art" ref={ref} aria-hidden="true">
-      <div className="px" style={{ "--d": 10 }}>
+      <div className="px" style={{ "--d": 6 }}>
         <svg className="pit" viewBox="0 0 700 520">
           {Array.from({ length: 9 }, (_, i) => (
             <ellipse key={i} className="ring" style={{ animationDelay: `${i * 0.28}s` }}
@@ -39,19 +44,22 @@ export function HeroArt() {
               fill={i % 2 ? "#3a3f3d" : "#2b2f2d"} stroke="#555c58" strokeWidth="1.4" />
           ))}
           <path d={SPIRAL} className="haul" fill="none" />
-          <circle r="5.5" fill="#feba88">
+          <circle r="4" fill="#fff">
             <animateMotion dur="14s" repeatCount="indefinite" path={SPIRAL} />
           </circle>
-          <circle className="target-halo" cx={CX + 34} cy={CY + 82} r="20" fill="#97c680" />
-          <ellipse cx={CX + 34} cy={CY + 82} rx="20" ry="9" fill="#97c680" />
+          {NODES.map((n) => (
+            <g key={n.label} className="node">
+              <line x1={n.x} y1={n.y} x2={n.x} y2="52" className="lead" />
+              <circle cx={n.x} cy={n.y} r="4.5" fill="#fff" />
+              <circle cx={n.x} cy={n.y} r="4.5" className="node-halo" />
+              <text x={n.x + 10} y="44" className="node-t"><tspan className="node-n">{n.num}</tspan>  {n.label}</text>
+            </g>
+          ))}
+          <circle className="target-halo" cx={CX + 34} cy={CY + 82} r="20" fill="#3a9d86" />
+          <ellipse cx={CX + 34} cy={CY + 82} rx="20" ry="9" fill="#3a9d86" />
         </svg>
       </div>
 
-      <div className="px s1" style={{ "--d": 26 }}><div className="shape leaf"><span>Sustentabilidad</span></div></div>
-      <div className="px s2" style={{ "--d": 18 }}><div className="shape peach"><span>Compliance</span></div></div>
-      <div className="px s3" style={{ "--d": 34 }}><div className="shape lilac"><span>Riesgos</span></div></div>
-      <div className="px s4" style={{ "--d": 14 }}><div className="shape ring-s" /></div>
-      <div className="px s5" style={{ "--d": 22 }}><div className="shape plus">+</div></div>
     </div>
   );
 }
@@ -76,18 +84,17 @@ export function MockCard() {
   }, []);
   return (
     <div className="mock-wrap" aria-hidden="true">
-      <div className="px" style={{ "--d": 8 }}>
+      <div className="px" style={{ "--d": 4 }}>
         <div className="mock">
           <div className="mock-top"><span>Tu diagnóstico</span><b>Bueno</b></div>
           <div className="mock-score">{n}<small>/100</small></div>
-          {[["Sustentabilidad", 78, "leaf"], ["Compliance", 66, "peach"], ["Gestión de riesgos", 72, "lilac"]].map(([name, v, c], i) => (
+          {[["Sustentabilidad", 78, "leaf"], ["Compliance", 66, "leaf"], ["Gestión de riesgos", 72, "leaf"]].map(([name, v, c], i) => (
             <div className="mock-row" key={name}><span>{name}</span>
               <i><u className={c} style={{ width: go ? `${v}%` : "0%", transitionDelay: `${i * 0.15}s` }} /></i></div>
           ))}
+          <div className="mock-foot"><span>2 alertas críticas</span><span>19 acciones sugeridas</span></div>
         </div>
       </div>
-      <div className="px chipA" style={{ "--d": 20 }}><div className="float-chip warn">⚠ Alerta crítica</div></div>
-      <div className="px chipB" style={{ "--d": 28 }}><div className="float-chip ok">✓ Plan de acción</div></div>
     </div>
   );
 }
