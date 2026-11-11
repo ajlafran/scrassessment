@@ -62,7 +62,7 @@ export default function Assessment({ questions, config }) {
   return (
     <>
       <Landing onStart={start} resume={answered > 0} onRestart={restart} />
-      <footer className="footer">© 2026 SCR · Autoevaluación orientativa basada en respuestas declaradas; no constituye una certificación.</footer>
+      <footer className="footer">© 2026 SCR · Autoevaluación orientativa basada en respuestas declaradas; no constituye una certificación. Fotografías: Pexels.</footer>
     </>
   );
 }

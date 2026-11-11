@@ -1,24 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-
-const CX = 330, CY = 250;
-// Camino de acarreo: espiral descendente desde el borde de la mina hasta el fondo
-function spiralPath() {
-  const pts = [];
-  const turns = 3.2, steps = 220;
-  for (let i = 0; i <= steps; i++) {
-    const t = i / steps, a = -Math.PI / 2 + t * turns * 2 * Math.PI;
-    const k = 1 - t * 0.9;
-    pts.push([CX + 270 * k * Math.cos(a) + t * 6, CY + 150 * k * Math.sin(a) + t * 34]);
-  }
-  return "M" + pts.map(([x, y]) => `${x.toFixed(1)} ${y.toFixed(1)}`).join(" L");
-}
-const SPIRAL = spiralPath();
-// Tres nodos (uno por área) sobre el borde de anillos de la mina
-const NODES = [["01", "SUSTENTABILIDAD", 0, -235], ["02", "COMPLIANCE", 2, -35], ["03", "RIESGOS", 1, 135]].map(([num, label, i, dx]) => {
-  const rx = 285 - i * 29, ry = 178 - i * 17, cy = CY + i * 9, cx = CX + i * 4;
-  return { num, label, x: cx + dx, y: cy - ry * Math.sqrt(1 - (dx / rx) ** 2) };
-});
+import { PHOTOS } from "../lib/photos";
 
 export function HeroArt() {
   const ref = useRef(null);
@@ -33,33 +15,11 @@ export function HeroArt() {
     hero.addEventListener("pointermove", move);
     return () => hero.removeEventListener("pointermove", move);
   }, []);
-
   return (
-    <div className="art" ref={ref} aria-hidden="true">
-      <div className="px" style={{ "--d": 6 }}>
-        <svg className="pit" viewBox="0 0 700 520">
-          {Array.from({ length: 9 }, (_, i) => (
-            <ellipse key={i} className="ring" style={{ animationDelay: `${i * 0.28}s` }}
-              cx={CX + i * 4} cy={CY + i * 9} rx={285 - i * 29} ry={178 - i * 17}
-              fill={i % 2 ? "#3a3f3d" : "#2b2f2d"} stroke="#555c58" strokeWidth="1.4" />
-          ))}
-          <path d={SPIRAL} className="haul" fill="none" />
-          <circle r="4" fill="#fff">
-            <animateMotion dur="14s" repeatCount="indefinite" path={SPIRAL} />
-          </circle>
-          {NODES.map((n) => (
-            <g key={n.label} className="node">
-              <line x1={n.x} y1={n.y} x2={n.x} y2="52" className="lead" />
-              <circle cx={n.x} cy={n.y} r="4.5" fill="#fff" />
-              <circle cx={n.x} cy={n.y} r="4.5" className="node-halo" />
-              <text x={n.x + 10} y="44" className="node-t"><tspan className="node-n">{n.num}</tspan>  {n.label}</text>
-            </g>
-          ))}
-          <circle className="target-halo" cx={CX + 34} cy={CY + 82} r="20" fill="#3a9d86" />
-          <ellipse cx={CX + 34} cy={CY + 82} rx="20" ry="9" fill="#3a9d86" />
-        </svg>
+    <div className="art" ref={ref}>
+      <div className="px photo-wrap" style={{ "--d": 8 }}>
+        <div className="photo-frame"><img className="hero-photo" src={PHOTOS.hero.src} alt={PHOTOS.hero.alt} fetchPriority="high" /></div>
       </div>
-
     </div>
   );
 }

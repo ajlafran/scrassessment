@@ -3,6 +3,7 @@ import Logo from "./Logo";
 import { useState } from "react";
 import { HeroArt, MockCard } from "./HeroArt";
 import data from "../data/assessment.json";
+import { PHOTOS } from "../lib/photos";
 
 const AREAS = [
   { name: "Sustentabilidad", color: "leaf", text: "Impacto ambiental y social, seguridad de las personas, derechos humanos y objetivos medibles." },
@@ -23,31 +24,26 @@ const FAQ = [
 ];
 
 function AreasPanel() {
-  const [open, setOpen] = useState(0);
-  const a = AREAS[open];
+  const [open, setOpen] = useState(-1);
   return (
-    <section className="areas2" id="areas">
-      <div className="areas2-in">
-        <div>
-          <p className="eyebrow">Qué evaluamos</p>
-          <h2>Tres áreas. <span className="hl">Un solo puntaje.</span></h2>
-          <div className="acc">
-            {AREAS.map((x, i) => (
-              <div className={`acc-item ${open === i ? "open" : ""}`} key={x.name}>
-                <button className="acc-btn" aria-expanded={open === i} onClick={() => setOpen(i)}>
-                  <span className={`dot ${x.color}`} /> {x.name} <em>{x.topics.length} puntos</em>
-                </button>
-                {open === i && <p className="acc-text">{x.text}</p>}
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="panel panel-areas" aria-live="polite">
-          <div className="fc fc-list" key={a.name}>
-            <strong>{a.name}</strong>
-            <ul>{a.topics.map((t) => <li key={t}><span className="ok-dot">✓</span>{t}</li>)}</ul>
-          </div>
-        </div>
+    <section className="areas3" id="areas">
+      <div className="areas3-head">
+        <p className="eyebrow">Qué evaluamos</p>
+        <h2>Tres áreas. <span className="hl">Un solo puntaje.</span></h2>
+      </div>
+      <div className="photo-row">
+        {AREAS.map((a, i) => (
+          <article className="pcard" key={a.name}>
+            <button className={`pimg ${open === i ? "open" : ""}`} aria-expanded={open === i}
+              aria-label={`Ver los ${a.topics.length} puntos de ${a.name}`} onClick={() => setOpen(open === i ? -1 : i)}>
+              <img src={PHOTOS.areas[a.name].src} alt={PHOTOS.areas[a.name].alt} loading="lazy" />
+              <span className="ptag">{String(i + 1).padStart(2, "0")} · {a.topics.length} puntos</span>
+              <span className="pover"><ul>{a.topics.map((t) => <li key={t}>{t}</li>)}</ul></span>
+            </button>
+            <h3>{a.name}</h3>
+            <p>{a.text}</p>
+          </article>
+        ))}
       </div>
     </section>
   );
@@ -102,7 +98,7 @@ export default function Landing({ onStart, resume, onRestart }) {
       <section className="showcase">
         <h2>Un informe que se entiende <span className="hl">de un vistazo</span>.</h2>
         <p className="showcase-sub">Sin planillas ni jerga: tu nivel, lo que te puede dejar afuera y qué hacer primero.</p>
-        <div className="panel">
+        <div className="panel panel-photo" style={{ backgroundImage: `url(${PHOTOS.team.src})` }}>
           <div className="fc fc-score"><span>Puntaje global</span><b>72<small>/100</small></b><i><u style={{ width: "72%" }} /></i><em>Nivel Bueno · meta 80</em></div>
           <div className="fc fc-alert"><strong>⚠ Alerta crítica</strong><span>Canal de denuncias sin ningún nivel de cumplimiento</span></div>
           <div className="fc fc-plan"><span className="prio Alta">Prioridad Alta</span><strong>Canal de denuncias</strong><span>Implementar un canal confidencial y accesible, con protocolo de gestión y plazos.</span></div>

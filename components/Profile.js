@@ -1,6 +1,7 @@
 "use client";
 import Logo from "./Logo";
 import { SECTORS, SIZES, URGENCIES, profileComplete } from "../lib/funnel";
+import { PHOTOS } from "../lib/photos";
 
 function Group({ legend, name, options, value, onChange }) {
   return (
@@ -24,6 +25,7 @@ export default function Profile({ profile, setProfile, onContinue, onExit }) {
     <div className="quiz">
       <header className="quiz-bar"><div className="quiz-bar-in"><Logo /><button className="link-arrow" onClick={onExit}>Salir</button></div></header>
       <div className="quiz-body profile">
+        <img className="cp-photo" src={PHOTOS.person.src} alt={PHOTOS.person.alt} />
         <p className="eyebrow">Antes de empezar · 1 minuto</p>
         <h2 className="qtext">Contanos un poco sobre tu empresa.</h2>
         <p className="muted pmuted">Así adaptamos las recomendaciones a tu situación.</p>

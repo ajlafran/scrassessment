@@ -1,6 +1,7 @@
 "use client";
 import Logo from "./Logo";
 import { DIMENSIONS } from "../lib/scoring";
+import { PHOTOS } from "../lib/photos";
 
 export default function Checkpoint({ dimension, questions, result, onContinue, onReview }) {
   const dim = result.dimensions.find((d) => d.name === dimension);
@@ -13,6 +14,7 @@ export default function Checkpoint({ dimension, questions, result, onContinue, o
     <div className="quiz">
       <header className="quiz-bar"><div className="quiz-bar-in"><Logo /></div></header>
       <div className="quiz-body cp">
+        <img className="cp-photo" src={PHOTOS.areas[dimension].src} alt={PHOTOS.areas[dimension].alt} />
         <p className="eyebrow">Área {step} de {DIMENSIONS.length} completada</p>
         <h2 className="qtext">{dimension}: {Math.round(dim.score)} <span className="muted">/ 100</span></h2>
         <div className="check-bar"><i><u style={{ width: `${dim.score}%` }} /></i><span className={`pill ${dim.band.tone}`}>{dim.band.label}</span></div>

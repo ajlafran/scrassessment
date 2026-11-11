@@ -2,6 +2,7 @@
 import { useEffect, useRef } from "react";
 import Logo from "./Logo";
 import { DIMENSIONS, LEVELS } from "../lib/scoring";
+import { PHOTOS } from "../lib/photos";
 
 const AREA_COLOR = { Sustentabilidad: "leaf", Compliance: "peach", "Gestión de riesgos": "lilac" };
 
@@ -58,6 +59,7 @@ export default function Quiz({ questions, idx, setIdx, answers, setAnswers, onFi
 
         <div className="qgrid" key={q.id}>
           <div className="qleft">
+            <img className="qphoto" src={PHOTOS.areas[q.dimension].src} alt="" />
             <span className={`chip ${AREA_COLOR[q.dimension]}`}>{q.dimension} · {posInArea}/{inArea.length}</span>
             <h2 className="qtext">{q.text}</h2>
             <p className="qtopic">Tema: {q.topic}</p>
