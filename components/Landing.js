@@ -1,17 +1,57 @@
+"use client";
 import Logo from "./Logo";
+import { useState } from "react";
 import { HeroArt, MockCard } from "./HeroArt";
+import data from "../data/assessment.json";
 
 const AREAS = [
-  { name: "Sustentabilidad", n: 8, color: "leaf", text: "Impacto ambiental y social, seguridad de las personas, derechos humanos y objetivos medibles." },
-  { name: "Compliance", n: 8, color: "peach", text: "Ética, anticorrupción, canal de denuncias, debida diligencia y obligaciones legales y contractuales." },
-  { name: "Gestión de riesgos", n: 9, color: "lilac", text: "Matriz de riesgos, controles, indicadores, continuidad del negocio y ciberseguridad." },
+  { name: "Sustentabilidad", color: "leaf", text: "Impacto ambiental y social, seguridad de las personas, derechos humanos y objetivos medibles." },
+  { name: "Compliance", color: "peach", text: "Ética, anticorrupción, canal de denuncias, debida diligencia y obligaciones legales y contractuales." },
+  { name: "Gestión de riesgos", color: "lilac", text: "Matriz de riesgos, controles, indicadores, continuidad del negocio y ciberseguridad." },
+].map((a) => ({ ...a, topics: data.questions.filter((q) => q.dimension === a.name).map((q) => q.topic) }));
+const COMPARE = [
+  ["Para saber dónde estás", "Revisar documentos a ciegas", "Un relevamiento que lleva tiempo", "Un diagnóstico guiado en minutos"],
+  ["Criterio de evaluación", "El que cada uno improvisa", "El de cada consultora", "25 puntos con niveles descriptos"],
+  ["Qué recibís", "Una lista de dudas", "Un informe al final del trabajo", "Puntaje, alertas y plan de acción"],
+  ["Primer paso", "Buscar por dónde empezar", "Coordinar reuniones", "Empezar hoy, sin costo"],
 ];
 const FAQ = [
-  ["¿Cuánto tarda?", "Unos 10 minutos. Son 25 preguntas y cada una tiene 4 niveles de respuesta con una descripción clara para elegir con criterio."],
+  ["¿Cuánto tarda?", "Entre 15 y 20 minutos. Son 25 preguntas y cada una tiene 4 niveles de respuesta con una descripción clara para elegir con criterio."],
   ["¿Qué pasa con mis respuestas?", "Se guardan solo en tu navegador mientras completás el diagnóstico. Si pedís tu plan de acción, nos llegan junto con tus datos de contacto."],
   ["¿Es una certificación?", "No. Es una autoevaluación basada en lo que declarás, pensada para detectar brechas antes de que las detecte un cliente minero."],
   ["¿Qué recibo al final?", "Un puntaje de 0 a 100, tu nivel en cada área, las alertas críticas y un plan de acción priorizado para cada punto a mejorar."],
 ];
+
+function AreasPanel() {
+  const [open, setOpen] = useState(0);
+  const a = AREAS[open];
+  return (
+    <section className="areas2" id="areas">
+      <div className="areas2-in">
+        <div>
+          <p className="eyebrow">Qué evaluamos</p>
+          <h2>Tres áreas. <span className="hl">Un solo puntaje.</span></h2>
+          <div className="acc">
+            {AREAS.map((x, i) => (
+              <div className={`acc-item ${open === i ? "open" : ""}`} key={x.name}>
+                <button className="acc-btn" aria-expanded={open === i} onClick={() => setOpen(i)}>
+                  <span className={`dot ${x.color}`} /> {x.name} <em>{x.topics.length} puntos</em>
+                </button>
+                {open === i && <p className="acc-text">{x.text}</p>}
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="panel panel-areas" aria-live="polite">
+          <div className="fc fc-list" key={a.name}>
+            <strong>{a.name}</strong>
+            <ul>{a.topics.map((t) => <li key={t}><span className="ok-dot">✓</span>{t}</li>)}</ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 export default function Landing({ onStart, resume, onRestart }) {
   return (
@@ -57,20 +97,26 @@ export default function Landing({ onStart, resume, onRestart }) {
         ))}
       </section>
 
-      <section className="areas" id="areas">
-        <div className="areas-in">
-          <p className="eyebrow leaf">Qué evaluamos</p>
-          <h2>Tres áreas, un solo puntaje.</h2>
-          <div className="area-grid">
-            {AREAS.map((a, i) => (
-              <article className={`area ${a.color}`} key={a.name}>
-                <span className="area-n">{String(i + 1).padStart(2, "0")}</span>
-                <h3>{a.name}</h3>
-                <p>{a.text}</p>
-                <b>{a.n} preguntas</b>
-              </article>
-            ))}
-          </div>
+      <AreasPanel />
+
+      <section className="showcase">
+        <h2>Un informe que se entiende <span className="hl">de un vistazo</span>.</h2>
+        <p className="showcase-sub">Sin planillas ni jerga: tu nivel, lo que te puede dejar afuera y qué hacer primero.</p>
+        <div className="panel">
+          <div className="fc fc-score"><span>Puntaje global</span><b>72<small>/100</small></b><i><u style={{ width: "72%" }} /></i><em>Nivel Bueno · meta 80</em></div>
+          <div className="fc fc-alert"><strong>⚠ Alerta crítica</strong><span>Canal de denuncias sin ningún nivel de cumplimiento</span></div>
+          <div className="fc fc-plan"><span className="prio Alta">Prioridad Alta</span><strong>Canal de denuncias</strong><span>Implementar un canal confidencial y accesible, con protocolo de gestión y plazos.</span></div>
+          <div className="fc fc-next"><span>Próximo paso</span><strong>Acompañamiento para cerrar brechas</strong></div>
+        </div>
+      </section>
+
+      <section className="compare">
+        <h2>Tres formas de llegar a saber qué te falta. <span className="hl">Una es la rápida.</span></h2>
+        <div className="table" role="table" aria-label="Comparación">
+          <div className="tr th" role="row"><span /><span>Sin guía</span><span>Consultora tradicional</span><span className="us">SCR</span></div>
+          {COMPARE.map(([k, a, b, c]) => (
+            <div className="tr" role="row" key={k}><span className="tk">{k}</span><span>{a}</span><span>{b}</span><span className="us">{c}</span></div>
+          ))}
         </div>
       </section>
 
@@ -84,7 +130,7 @@ export default function Landing({ onStart, resume, onRestart }) {
       </section>
 
       <section className="final">
-        <h2>Empezá hoy. Son 10 minutos.</h2>
+        <h2>Empezá hoy. Son entre 15 y 20 minutos.</h2>
         <button className="pill-btn dark big" onClick={onStart}>{resume ? "Continuar diagnóstico" : "Comenzar diagnóstico"}</button>
       </section>
     </>

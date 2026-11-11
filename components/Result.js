@@ -1,7 +1,8 @@
 "use client";
 import { useState } from "react";
 import Logo from "./Logo";
-import { LEVELS } from "../lib/scoring";
+import { BANDS, LEVELS } from "../lib/scoring";
+import { gapTo, serviceTier, temperature } from "../lib/funnel";
 
 const AREA_COLOR = { Sustentabilidad: "leaf", Compliance: "peach", "Gestión de riesgos": "lilac" };
 
@@ -17,8 +18,10 @@ function Gauge({ score }) {
   );
 }
 
-export default function Result({ result, answers, unlocked, onUnlock, config, onBack, onRestart }) {
+export default function Result({ result, answers, profile, unlocked, onUnlock, config, onBack, onRestart }) {
   const { score, band, dimensions, alerts, actions } = result;
+  const tier = serviceTier(score);
+  const temp = temperature(profile, result);
   return (
     <>
       <header className="quiz-bar dark">
@@ -48,6 +51,7 @@ export default function Result({ result, answers, unlocked, onUnlock, config, on
       </section>
 
       <div className="res-body">
+        <ScaleBar score={score} />
         {alerts.length > 0 && (
           <div className="alert" role="alert">
             <strong>Alertas críticas</strong>
@@ -84,10 +88,10 @@ export default function Result({ result, answers, unlocked, onUnlock, config, on
               </ol>
               {!unlocked && (
                 <LeadForm count={actions.length} score={score} band={band} dimensions={dimensions} alerts={alerts}
-                  answers={answers} onUnlock={onUnlock} />
+                  answers={answers} profile={profile} tier={tier} temp={temp} onUnlock={onUnlock} />
               )}
             </div>
-            {unlocked && <Contact config={config} />}
+            {unlocked && <Contact config={config} tier={tier} />}
           </>
         )}
       </div>
@@ -95,7 +99,7 @@ export default function Result({ result, answers, unlocked, onUnlock, config, on
   );
 }
 
-function LeadForm({ count, score, band, dimensions, alerts, answers, onUnlock }) {
+function LeadForm({ count, score, band, dimensions, alerts, answers, profile, tier, temp, onUnlock }) {
   const [f, setF] = useState({ company: "", name: "", email: "", phone: "", consent: false, website: "" });
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
@@ -108,7 +112,7 @@ function LeadForm({ count, score, band, dimensions, alerts, answers, onUnlock })
       const res = await fetch("/api/lead", {
         method: "POST", headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...f, score, band: band.label, dimensions: dimensions.map((d) => ({ name: d.name, score: d.score })),
-          alerts: alerts.map((q) => q.topic), answers }),
+          alerts: alerts.map((q) => q.topic), answers, profile, tier: tier.title, temperature: temp }),
       });
       const out = await res.json().catch(() => ({}));
       if (!res.ok || !out.ok) throw new Error(out.error || "No pudimos enviar tus datos.");
@@ -137,15 +141,37 @@ function LeadForm({ count, score, band, dimensions, alerts, answers, onUnlock })
   );
 }
 
-function Contact({ config }) {
+function Contact({ config, tier }) {
   const wa = config.whatsapp && `https://wa.me/${config.whatsapp}?text=${encodeURIComponent("Hola, completé el diagnóstico SCR y quiero avanzar con el plan de acción.")}`;
   return (
     <div className="contact">
-      <h2>¿Querés que te ayudemos a llevarlo adelante?</h2>
-      <p>Ya tenemos tus datos y te vamos a contactar. Si preferís, escribinos o agendá una reunión ahora.</p>
+      <p className="eyebrow leaf">Próximo paso recomendado</p>
+      <h2>{tier.title}</h2>
+      <p>{tier.text} Ya tenemos tus datos y te vamos a contactar. Si preferís, escribinos o agendá una reunión ahora.</p>
       <div className="hero-cta">
         {wa && <a className="pill-btn white big" href={wa} target="_blank" rel="noopener noreferrer">Escribir por WhatsApp</a>}
+        <button className="link-arrow light pdf-btn" onClick={() => window.print()}>Descargar informe (PDF)</button>
         {config.calendarUrl && <a className="link-arrow light" href={config.calendarUrl} target="_blank" rel="noopener noreferrer">Agendar reunión <span aria-hidden="true">→</span></a>}
+      </div>
+    </div>
+  );
+}
+
+function ScaleBar({ score }) {
+  const gap = gapTo(score);
+  return (
+    <div className="scale">
+      <div className="scale-head">
+        <h2>{gap > 0 ? `Te faltan ${String(gap).replace(".", ",")} puntos para el nivel Satisfactorio.` : "Alcanzaste el nivel Satisfactorio."}</h2>
+        <p className="muted">Las mineras suelen exigir prácticas consolidadas: el objetivo de referencia es 80 o más.</p>
+      </div>
+      <div className="scale-track" role="img" aria-label={`Tu puntaje es ${Math.round(score)}. Referencia: 80`}>
+        {[...BANDS].reverse().map((b, i, arr) => {
+          const next = arr[i + 1]?.min ?? 100;
+          return <span key={b.label} className={`seg-band ${b.tone}`} style={{ width: `${next - b.min}%` }}><em>{b.label}</em></span>;
+        })}
+        <i className="you" style={{ left: `${Math.min(score, 99.5)}%` }}><b>Vos · {Math.round(score)}</b></i>
+        <i className="target" style={{ left: "80%" }}><b>Meta · 80</b></i>
       </div>
     </div>
   );

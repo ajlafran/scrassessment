@@ -5,22 +5,22 @@ import { DIMENSIONS, LEVELS } from "../lib/scoring";
 
 const AREA_COLOR = { Sustentabilidad: "leaf", Compliance: "peach", "Gestión de riesgos": "lilac" };
 
-export default function Quiz({ questions, idx, setIdx, answers, setAnswers, onFinish, onExit }) {
+export default function Quiz({ questions, idx, setIdx, answers, setAnswers, onFinish, onCheckpoint, onExit }) {
   const q = questions[idx];
   const last = idx === questions.length - 1;
   const timer = useRef(null);
   const value = answers[q.id];
-  const allDone = questions.every((x) => answers[x.id] !== undefined);
 
-  const next = () => (last ? allDone && onFinish() : setIdx(idx + 1));
+  const advance = (merged) => {
+    if (last) { if (questions.every((x) => merged[x.id] !== undefined)) onFinish(); return; }
+    if (questions[idx + 1].dimension !== q.dimension) onCheckpoint(); else setIdx(idx + 1);
+  };
+  const next = () => advance(answers);
   const choose = (lvl) => {
     const merged = { ...answers, [q.id]: lvl };
     setAnswers(merged);
     clearTimeout(timer.current);
-    timer.current = setTimeout(() => {
-      if (!last) setIdx(idx + 1);
-      else if (questions.every((x) => merged[x.id] !== undefined)) onFinish();
-    }, 420);
+    timer.current = setTimeout(() => advance(merged), 420);
   };
   useEffect(() => () => clearTimeout(timer.current), []);
   useEffect(() => {
@@ -79,7 +79,7 @@ export default function Quiz({ questions, idx, setIdx, answers, setAnswers, onFi
           <button className="link-arrow" disabled={idx === 0} onClick={() => { clearTimeout(timer.current); setIdx(idx - 1); }}>← Anterior</button>
           <span className="count">Pregunta {idx + 1} de {questions.length}</span>
           <button className="pill-btn dark" disabled={value === undefined} onClick={() => { clearTimeout(timer.current); next(); }}>
-            {last ? "Ver resultado" : "Siguiente"}
+            {last ? "Ver resultado" : questions[idx + 1].dimension !== q.dimension ? "Terminar área" : "Siguiente"}
           </button>
         </div>
       </div>

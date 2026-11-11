@@ -18,6 +18,8 @@ export async function POST(request) {
     phone: str(body.phone, 40),
     consent: body.consent === true,
   };
+  const pf = body.profile && typeof body.profile === "object" ? body.profile : {};
+  const profile = { sector: str(pf.sector, 120), size: str(pf.size, 60), urgency: str(pf.urgency, 120), target: str(pf.target, 120) };
   if (!lead.company || !lead.name || !lead.phone) return bad("Completá todos los campos.");
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(lead.email)) return bad("El mail no parece válido.");
   if (!lead.consent) return bad("Necesitamos tu consentimiento para contactarte.");
@@ -32,6 +34,9 @@ export async function POST(request) {
     ...lead,
     score: Number(body.score) || 0,
     band: str(body.band, 40),
+    profile,
+    temperature: str(body.temperature, 20),
+    tier: str(body.tier, 80),
     dimensions: Array.isArray(body.dimensions) ? body.dimensions.slice(0, 5) : [],
     alerts: Array.isArray(body.alerts) ? body.alerts.slice(0, 30) : [],
     answers: body.answers && typeof body.answers === "object" ? body.answers : {},

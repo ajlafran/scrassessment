@@ -2,7 +2,7 @@
 // → Tipo: Aplicación web → Ejecutar como: yo → Acceso: cualquier persona. Copiar la URL resultante.
 // En Configuración del proyecto → Propiedades del script, crear SECRET con una clave larga a elección.
 const HEADERS = ["Fecha", "Empresa", "Nombre", "Email", "Teléfono", "Puntaje", "Franja",
-  "Sustentabilidad", "Compliance", "Gestión de riesgos", "Alertas críticas", "Respuestas (N.º pregunta: nivel 0-3)"];
+  "Sustentabilidad", "Compliance", "Gestión de riesgos", "Alertas críticas", "Temperatura", "Servicio sugerido", "Rubro", "Tamaño", "Urgencia", "Minera / proyecto", "Respuestas (N.º pregunta: nivel 0-3)"];
 
 function doPost(e) {
   const d = JSON.parse(e.postData.contents);
@@ -13,7 +13,8 @@ function doPost(e) {
   const dim = (n) => (d.dimensions.find((x) => x.name === n) || {}).score;
   sheet.appendRow([new Date(), d.company, d.name, d.email, d.phone, d.score, d.band,
     dim("Sustentabilidad"), dim("Compliance"), dim("Gestión de riesgos"),
-    (d.alerts || []).join(", "), JSON.stringify(d.answers)]);
+    (d.alerts || []).join(", "), d.temperature, d.tier, (d.profile || {}).sector, (d.profile || {}).size,
+    (d.profile || {}).urgency, (d.profile || {}).target, JSON.stringify(d.answers)]);
   return out({ ok: true });
 }
 function out(o) { return ContentService.createTextOutput(JSON.stringify(o)).setMimeType(ContentService.MimeType.JSON); }

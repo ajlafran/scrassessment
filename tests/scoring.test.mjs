@@ -39,3 +39,26 @@ test("alerta crítica solo con No cumple en preguntas sensibles", () => {
   assert.deepEqual(computeResult(questions, { ...all(3), 10: 0, 4: 0 }).alerts.map((q) => q.id), [10]);
   assert.equal(computeResult(questions, { ...all(3), 10: 1 }).alerts.length, 0);
 });
+
+import { serviceTier, temperature, gapTo, profileComplete, URGENCIES } from "../lib/funnel.js";
+test("nivel de servicio según puntaje", () => {
+  assert.equal(serviceTier(10).id, "adecuacion");
+  assert.equal(serviceTier(39.9).id, "adecuacion");
+  assert.equal(serviceTier(40).id, "acompanamiento");
+  assert.equal(serviceTier(79.9).id, "acompanamiento");
+  assert.equal(serviceTier(80).id, "auditoria");
+});
+test("temperatura del contacto", () => {
+  const r = (score, nAlerts) => ({ score, alerts: Array(nAlerts).fill(1) });
+  assert.equal(temperature({ urgency: URGENCIES[0] }, r(90, 0)), "Caliente");
+  assert.equal(temperature({ urgency: URGENCIES[1] }, r(50, 0)), "Caliente");
+  assert.equal(temperature({ urgency: URGENCIES[1] }, r(85, 0)), "Tibio");
+  assert.equal(temperature({ urgency: URGENCIES[2] }, r(70, 0)), "Frío");
+  assert.equal(temperature({ urgency: URGENCIES[2] }, r(30, 1)), "Tibio");
+});
+test("brecha al nivel satisfactorio y perfil completo", () => {
+  assert.equal(gapTo(62.5), 17.5);
+  assert.equal(gapTo(95), 0);
+  assert.equal(profileComplete({ sector: "a", size: "b", urgency: "c" }), true);
+  assert.equal(profileComplete({ sector: "a" }), false);
+});
